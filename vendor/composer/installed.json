@@ -1,0 +1,56 @@
+[
+    {
+        "name": "numphp/numphp",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/NumPHP/NumPHP.git",
+            "reference": "f329edfb3c50b5f12d889cad0e9257d7a9d15447"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/NumPHP/NumPHP/zipball/f329edfb3c50b5f12d889cad0e9257d7a9d15447",
+            "reference": "f329edfb3c50b5f12d889cad0e9257d7a9d15447",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "phpmd/phpmd": "*",
+            "phpunit/phpunit": "*",
+            "satooshi/php-coveralls": "v1.0.1",
+            "sebastian/phpcpd": "*",
+            "squizlabs/php_codesniffer": "*",
+            "symfony/console": "~2.2"
+        },
+        "time": "2016-02-18T08:04:29+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "NumPHP\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Gordon Lesti",
+                "email": "info@gordonlesti.com",
+                "homepage": "http://gordonlesti.com/",
+                "role": "developer"
+            }
+        ],
+        "description": "Mathematical PHP library for scientific computing",
+        "homepage": "http://numphp.org/",
+        "keywords": [
+            "linalg",
+            "matrix",
+            "numeric"
+        ]
+    }
+]
