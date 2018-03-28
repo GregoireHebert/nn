@@ -45,11 +45,11 @@ class NeuralNetwork
      */
     public function __construct(int $inputLayers, int $hiddenLayers, int $outputLayers)
     {
-        $this->weights_ih = new Matrix($this->initMatrixArray($hiddenLayers, $inputLayers));
-        $this->weights_ho = new Matrix($this->initMatrixArray($outputLayers, $hiddenLayers));
+        $this->weights_ih = new Matrix($this->initMatrix($hiddenLayers, $inputLayers));
+        $this->weights_ho = new Matrix($this->initMatrix($outputLayers, $hiddenLayers));
 
-        $this->bias_h = new Matrix($this->initMatrixArray($hiddenLayers, 1));
-        $this->bias_o = new Matrix($this->initMatrixArray($outputLayers, 1));
+        $this->bias_h = new Matrix($this->initMatrix($hiddenLayers, 1));
+        $this->bias_o = new Matrix($this->initMatrix($outputLayers, 1));
     }
 
     /**
@@ -62,7 +62,7 @@ class NeuralNetwork
      *
      * @throws \Exception
      */
-    private function initMatrixArray(int $rows, int $columns): array
+    private function initMatrix(int $rows, int $columns): array
     {
         $matrixData = array_fill(0, $rows, 0);
 
@@ -185,17 +185,20 @@ class NeuralNetwork
     {
         $inputs = new Matrix($this->flatToData($arrayInputs));
 
+        // feed forward
         $hidden = clone $this->weights_ih;
         $hidden = $hidden->dot($inputs);
         $hidden->add($this->bias_h);
-        $hidden->map([$this, 'sigmoid']); // activation
+        $hidden->map([$this, 'sigmoid']);
 
         $outputs = clone $this->weights_ho;
         $outputs = $outputs->dot($hidden);
         $outputs->add($this->bias_o);
-        $outputs->map([$this, 'sigmoid']); // activation
+        $outputs->map([$this, 'sigmoid']);
 
-        //////
+        
+        // back propagation // Linear Gradient Descent // Output -> Hidden
+
 
         $expected = new Matrix($arrayExpected);
         $output_errors = clone $expected;
@@ -210,11 +213,13 @@ class NeuralNetwork
         $weight_ho_deltas = clone $gradient;
         $weight_ho_deltas = $weight_ho_deltas->dot($hidden_t);
 
+        // 
         $this->weights_ho->add($weight_ho_deltas);
         $this->bias_o->add($gradient);
 
-        /////
-        /////
+
+        // back propagation // Linear Gradient Descent // Hidden -> Input
+
 
         $who_t = $this->weights_ho->getTranspose();
         $hidden_error = clone $who_t;
