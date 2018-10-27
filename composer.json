@@ -2,5 +2,8 @@
   "require": {
     "php": ">=7.1.0",
     "numphp/numphp": "*"
+  },
+  "autoload": {
+    "psr-4": {"nn\\": "src"}
   }
 }

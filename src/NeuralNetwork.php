@@ -37,10 +37,6 @@ class NeuralNetwork
     private $learning_rate = 0.3;
 
     /**
-     * @param int $inputLayers
-     * @param int $hiddenLayers
-     * @param int $outputLayers
-     *
      * @throws \Exception
      */
     public function __construct(int $inputLayers, int $hiddenLayers, int $outputLayers)
@@ -52,13 +48,13 @@ class NeuralNetwork
         $this->bias_o = new Matrix($this->initMatrix($outputLayers, 1));
     }
 
+    public function setLearningRate(float $lr): void
+    {
+        $this->learning_rate = $lr;
+    }
+
     /**
      * Initialize a matrix with random numbers between 0 and 1 included.
-     *
-     * @param int $rows
-     * @param int $columns
-     *
-     * @return array
      *
      * @throws \Exception
      */
@@ -71,29 +67,14 @@ class NeuralNetwork
         });
 
         array_walk_recursive($matrixData, function (&$value) {
-            $value = $this->getRandom();
+            $value = lcg_value();
         });
 
         return $matrixData;
     }
 
     /**
-     * Return random float between 0 and 1 included.
-     *
-     * @return float
-     *
-     * @throws \Exception
-     */
-    private function getRandom(): float
-    {
-        return random_int(0,100)/100;
-    }
-
-    /**
      * Transform a matrix data to a flat array
-     *
-     * @param array $data
-     * @return array
      */
     private function dataToFlat(array $data): array
     {
@@ -108,10 +89,6 @@ class NeuralNetwork
 
     /**
      * Transform a flat array to a matrix data
-     *
-     * @param $flat
-     *
-     * @return array
      */
     private function flatToData(array $flat): array
     {
@@ -125,10 +102,6 @@ class NeuralNetwork
 
     /**
      * Feed in the data to analyze, it'll return the computed result as a flat array.
-     *
-     * @param array $inputs
-     *
-     * @return array
      */
     public function feedForward(array $inputs): array
     {
@@ -137,47 +110,19 @@ class NeuralNetwork
         $hidden = clone $this->weights_ih;
         $hidden = $hidden->dot($inputMatrix);
         $hidden->add($this->bias_h);
-        $hidden->map([$this, 'sigmoid']); // activation
+        $hidden->map(Util::class.'::sigmoid'); // activation
 
         $output = clone $this->weights_ho;
         $output = $output->dot($hidden);
         $output->add($this->bias_o);
-        $output->map([$this, 'sigmoid']); // activation
+        $output->map(Util::class.'::sigmoid'); // activation
 
         return $this->dataToFlat($output->getData());
     }
 
     /**
-     * Sigmoid function
-     *
-     * @param int $x
-     *
-     * @return float
-     */
-    public function sigmoid(int $x): float
-    {
-        return  1 / (1 + exp(-$x));
-    }
-
-    /**
-     * The derivative of the sigmoid function is `sigmoid(x) * (1 - sigmoid(x))`
-     * but since I use already a sigmoidal value for x, I don't need to perform it again, so I'll compute `x * (1 - x)`
-     *
-     * @param float $x
-     *
-     * @return float
-     */
-    public function dsigmoid(float $x): float
-    {
-        return  $x * (1 - $x);
-    }
-
-    /**
      * Function you need to perform to train you neural network.
      * For proper results, you need to pass in the different cases randomly.
-     *
-     * @param array $arrayInputs
-     * @param array $arrayExpected
      *
      * @throws \Exception
      */
@@ -189,23 +134,20 @@ class NeuralNetwork
         $hidden = clone $this->weights_ih;
         $hidden = $hidden->dot($inputs);
         $hidden->add($this->bias_h);
-        $hidden->map([$this, 'sigmoid']);
+        $hidden->map(Util::class.'::sigmoid');
 
         $outputs = clone $this->weights_ho;
         $outputs = $outputs->dot($hidden);
         $outputs->add($this->bias_o);
-        $outputs->map([$this, 'sigmoid']);
+        $outputs->map(Util::class.'::sigmoid');
 
-        
         // back propagation // Linear Gradient Descent // Output -> Hidden
-
-
         $expected = new Matrix($arrayExpected);
         $output_errors = clone $expected;
         $output_errors = $output_errors->sub($outputs);
 
         $gradient = clone $outputs;
-        $gradient->map([$this, 'dsigmoid']);
+        $gradient->map(Util::class.'::dsigmoid');
         $gradient->dot($output_errors);
         $gradient->dot($this->learning_rate);
 
@@ -213,21 +155,16 @@ class NeuralNetwork
         $weight_ho_deltas = clone $gradient;
         $weight_ho_deltas = $weight_ho_deltas->dot($hidden_t);
 
-        // 
         $this->weights_ho->add($weight_ho_deltas);
         $this->bias_o->add($gradient);
 
-
         // back propagation // Linear Gradient Descent // Hidden -> Input
-
-
         $who_t = $this->weights_ho->getTranspose();
         $hidden_error = clone $who_t;
         $hidden_error = $hidden_error->dot($output_errors);
 
-
         $hidden_gradient = clone $hidden;
-        $hidden_gradient->map([$this, 'dsigmoid']);
+        $hidden_gradient->map(Util::class.'::dsigmoid');
         $hidden_gradient->mult($hidden_error);
         $hidden_gradient->dot($this->learning_rate);
 
