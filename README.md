@@ -33,7 +33,7 @@ $training_data = [
 
 for ($i = 0; $i < 200; ++$i) {
     foreach ($training_data as $data) {
-        $nn->train($data[0], $data[1]);
+        $nn->train(...$data);
     }
 }
 
