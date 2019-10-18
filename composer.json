@@ -1,4 +1,14 @@
 {
+  "name": "gheb/nn",
+  "type": "project",
+  "description": "NeuralNetwork",
+  "authors": [
+    {
+      "name": "Grégoire Hébert",
+      "email": "gregoire@les-tilleuls.coop"
+    }
+  ],
+  "minimum-stability": "dev",
   "require": {
     "php": ">=7.1.0",
     "numphp/numphp": "*"
