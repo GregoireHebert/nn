@@ -10,7 +10,8 @@ php -r "unlink('composer-setup.php');"
 mv ./composer.phar ./composer
 
 composer install
-cd $webDir && yarn install && yarn add node-sass && yarn run build && cd ..
-php symfony server:start --no-tls -d
+cd $webDir && npm install --from-lock-file && yarn build && cd ..
+
+symfony server:start --no-tls -d
 
 exit 1

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "528ea2c88d46d657807644484818cbe4",
+    "content-hash": "3285a12b0f381b8cea454c35bffbe682",
     "packages": [
         {
             "name": "gheb/nn",
@@ -802,6 +802,9 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^7.2",
+        "ext-pdo": "*"
+    },
     "platform-dev": []
 }
