@@ -1,0 +1,5 @@
+#!/bin/sh
+
+symfony server:stop
+
+exit;

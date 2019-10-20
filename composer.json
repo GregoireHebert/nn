@@ -1,0 +1,33 @@
+{
+    "name": "gheb/tamagotchi",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Grégoire Hébert",
+            "email": "gregoire@les-tilleuls.coop"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.2",
+        "ext-pdo": "*",
+        "symfony/http-foundation": "^5.0@dev",
+        "twig/twig": "3.x-dev",
+        "symfony/routing": "^5.0@dev",
+        "symfony/serializer": "^5.0@dev",
+        "symfony/property-access": "^5.0@dev",
+        "gheb/nn": "dev-master",
+        "numphp/numphp": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/GregoireHebert/NumPHP.git"
+        }
+    ]
+}

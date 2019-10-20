@@ -1,3 +1,4 @@
 /vendor/
 /var/cache/*
 /public/node_modules/
+/var/database.sqlite
