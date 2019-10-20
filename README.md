@@ -1,4 +1,25 @@
-Tamagotchi
+# Tamagotchi example of nn usage
+
+This sheep needs to eat, sleep, run.
+For each need, being over 7/10, has in effect to remove 1/10 life point.
+The Neural Network is train so it does not happen.
+
+Every 20sec, a new action is taken.
+
+## Quick start
+
+### start the webserver
+```bash
+./start
+```
+
+open you browser to http://localhost:8000
+
+### stop the web server
+
+```bash
+./stop
+```
 
 ## Installation
 
@@ -103,4 +124,3 @@ update `/etc/supervisor/supervisor.conf` and change the `unix_http_server` chmod
 
 The sheep id is stored in the session.
 delete the session cookie to create a new sheep.
-
