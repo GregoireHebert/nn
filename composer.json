@@ -23,11 +23,5 @@
         "psr-4": {
             "App\\": "src/"
         }
-    },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/GregoireHebert/NumPHP.git"
-        }
-    ]
+    }
 }
