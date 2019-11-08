@@ -11,7 +11,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.1.0",
-    "numphp/numphp": "*"
+    "numphp/numphp": "^1.2"
   },
   "autoload": {
     "psr-4": {"nn\\": "src"}

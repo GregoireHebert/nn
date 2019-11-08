@@ -1,35 +1,34 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66d52dd026cb6f826c97f0cbf5219b5d",
+    "content-hash": "0e42efe5d7b016e4e4b43961984cd4bb",
     "packages": [
         {
             "name": "numphp/numphp",
-            "version": "1.1.0",
+            "version": "1.2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NumPHP/NumPHP.git",
-                "reference": "f329edfb3c50b5f12d889cad0e9257d7a9d15447"
+                "reference": "cae62d83debee8b0f1e1c53e060c6688014dc0c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NumPHP/NumPHP/zipball/f329edfb3c50b5f12d889cad0e9257d7a9d15447",
-                "reference": "f329edfb3c50b5f12d889cad0e9257d7a9d15447",
+                "url": "https://api.github.com/repos/NumPHP/NumPHP/zipball/cae62d83debee8b0f1e1c53e060c6688014dc0c8",
+                "reference": "cae62d83debee8b0f1e1c53e060c6688014dc0c8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4"
             },
             "require-dev": {
-                "phpmd/phpmd": "*",
-                "phpunit/phpunit": "*",
-                "satooshi/php-coveralls": "v1.0.1",
-                "sebastian/phpcpd": "*",
-                "squizlabs/php_codesniffer": "*",
-                "symfony/console": "~2.2"
+                "phpmd/phpmd": "^2.7",
+                "phpunit/phpunit": "^5.7",
+                "satooshi/php-coveralls": "^2.1",
+                "sebastian/phpcpd": "^3.0",
+                "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
             "autoload": {
@@ -56,15 +55,17 @@
                 "matrix",
                 "numeric"
             ],
-            "time": "2016-02-18T08:04:29+00:00"
+            "time": "2019-11-05T17:22:03+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.1.0"
+    },
     "platform-dev": []
 }

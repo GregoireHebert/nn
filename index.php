@@ -20,6 +20,7 @@ $training_data = [
     [[10], [1]],
 ];
 
+// try with a loop of 500 then 1000 or 2000 to see the difference in the result precision
 for ($i = 0; $i < 200; ++$i) {
     foreach ($training_data as $data) {
         $nn->train($data[0], $data[1]);
