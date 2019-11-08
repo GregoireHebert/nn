@@ -1,15 +1,27 @@
 # NEURAL NETWORK
 
+This repository purpose is to provide a toy for Machine Learning around the SymfonyLive Paris 2018 and SymfonyCon Amsterdam 2019
 
-This repository purpose is to provide a toy for Machine Learning around the SymfonyLive Paris 2018.
-I had to made little changes int the matrices library with no will to publish, this is why I pushed the vendor directory.
-Plus, It allows you to directly test it :)
+## prerequisite
 
-All you need to do is to play with the index.php
+* php > 7.1
+* composer (http://getcomposer.org)
+
+## Installation
+
+```shell
+composer install
+```
+
+## Usage
+
+``` shell
+php example.php
+```
 
 ```php
 <?php
-// index.php
+// example.php
 
 require_once 'vendor/autoload.php';
 
