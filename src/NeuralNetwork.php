@@ -54,73 +54,6 @@ class NeuralNetwork
     }
 
     /**
-     * Initialize a matrix with random numbers between 0 and 1 included.
-     *
-     * @throws \Exception
-     */
-    private function initMatrix(int $rows, int $columns): array
-    {
-        $matrixData = array_fill(0, $rows, 0);
-
-        array_walk($matrixData, function (&$value) use ($columns) {
-            $value = array_fill(0, $columns, 0);
-        });
-
-        array_walk_recursive($matrixData, function (&$value) {
-            $value = lcg_value();
-        });
-
-        return $matrixData;
-    }
-
-    /**
-     * Transform a matrix data to a flat array
-     */
-    private function dataToFlat(array $data): array
-    {
-        $flat = [];
-
-        array_walk_recursive($data, function ($value) use(&$flat) {
-            $flat[] = $value;
-        });
-
-        return $flat;
-    }
-
-    /**
-     * Transform a flat array to a matrix data
-     */
-    private function flatToData(array $flat): array
-    {
-        $data = array_fill(0, \count($flat), []);
-        foreach ($flat as $key=>$value) {
-            $data[$key][0] = $value;
-        }
-
-        return $data;
-    }
-
-    /**
-     * Feed in the data to analyze, it'll return the computed result as a flat array.
-     */
-    public function feedForward(array $inputs): array
-    {
-        $inputMatrix = new Matrix($this->flatToData($inputs));
-
-        $hidden = clone $this->weights_ih;
-        $hidden = $hidden->dot($inputMatrix);
-        $hidden->add($this->bias_h);
-        $hidden->map(Util::class.'::sigmoid'); // activation
-
-        $output = clone $this->weights_ho;
-        $output = $output->dot($hidden);
-        $output->add($this->bias_o);
-        $output->map(Util::class.'::sigmoid'); // activation
-
-        return $this->dataToFlat($output->getData());
-    }
-
-    /**
      * Function you need to perform to train you neural network.
      * For proper results, you need to pass in the different cases randomly.
      *
@@ -176,4 +109,72 @@ class NeuralNetwork
         $this->weights_ih->add($weight_ih_deltas);
         $this->bias_h->add($hidden_gradient);
     }
+
+    /**
+     * Feed in the data to analyze, it'll return the computed result as a flat array.
+     */
+    public function feedForward(array $inputs): array
+    {
+        $inputMatrix = new Matrix($this->flatToData($inputs));
+
+        $hidden = clone $this->weights_ih;
+        $hidden = $hidden->dot($inputMatrix);
+        $hidden->add($this->bias_h);
+        $hidden->map(Util::class.'::sigmoid'); // activation
+
+        $output = clone $this->weights_ho;
+        $output = $output->dot($hidden);
+        $output->add($this->bias_o);
+        $output->map(Util::class.'::sigmoid'); // activation
+
+        return $this->dataToFlat($output->getData());
+    }
+
+    /**
+     * Initialize a matrix with random numbers between 0 and 1 included.
+     *
+     * @throws \Exception
+     */
+    private function initMatrix(int $rows, int $columns): array
+    {
+        $matrixData = array_fill(0, $rows, 0);
+
+        array_walk($matrixData, function (&$value) use ($columns) {
+            $value = array_fill(0, $columns, 0);
+        });
+
+        array_walk_recursive($matrixData, function (&$value) {
+            $value = lcg_value();
+        });
+
+        return $matrixData;
+    }
+
+    /**
+     * Transform a matrix data to a flat array
+     */
+    private function dataToFlat(array $data): array
+    {
+        $flat = [];
+
+        array_walk_recursive($data, function ($value) use(&$flat) {
+            $flat[] = $value;
+        });
+
+        return $flat;
+    }
+
+    /**
+     * Transform a flat array to a matrix data
+     */
+    private function flatToData(array $flat): array
+    {
+        $data = array_fill(0, \count($flat), []);
+        foreach ($flat as $key=>$value) {
+            $data[$key][0] = $value;
+        }
+
+        return $data;
+    }
+
 }
